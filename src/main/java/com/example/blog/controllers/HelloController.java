@@ -1,7 +1,11 @@
 package com.example.blog.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class HelloController {
@@ -29,5 +33,30 @@ public class HelloController {
     @ResponseBody
     public String addOne(@PathVariable String name) {
         return "Hello " + name;
+    }
+
+    @GetMapping("/home")
+    public String welcome() {
+        return "home";
+    }
+
+    @GetMapping("/home/{name}")
+    public String welcome(@PathVariable String name,Model model){
+        model.addAttribute("name", name);
+        return ("home");
+    }
+
+    @GetMapping("/home/users")
+    public String welcomeUsers(Model model){
+        List<String> users = new ArrayList<>();
+        users.add("Bob");
+        users.add("Debbie");
+        users.add("Steven");
+        users.add("Tim");
+        users.add("Brandon");
+        users.add("Lori-Beth");
+
+        model.addAttribute("users", users);
+        return ("home");
     }
 }
