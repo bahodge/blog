@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="partials/header :: header(Home)">
+<head th:replace="partials/header :: header('Create New Post')">
 </head>
 <body>
 <div th:replace="partials/navbar :: navbar"></div>
@@ -10,5 +10,7 @@
 </div>
 
 <div th:replace="partials/footer :: footer"></div>
+<!--custom js-->
+<script src="/forms.js"></script>
 </body>
 </html>

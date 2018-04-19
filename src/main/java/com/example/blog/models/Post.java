@@ -1,9 +1,23 @@
 package com.example.blog.models;
 
+import com.sun.javafx.beans.IDProperty;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "posts")
 public class Post {
 
+    @Id
+    @GeneratedValue
+    @Column(columnDefinition = "INT(11) UNSIGNED")
     private long id;
+
+    @Column(nullable = false)
     private String title;
+
+    @Column(columnDefinition = "TEXT", nullable = false)
     private String body;
 
 
