@@ -62,9 +62,16 @@ public class PostController {
 
     @PostMapping(path = "/posts/edit")
     public String handleEdit(@ModelAttribute Post post){
-        Post e = postDao.findById(post.getId());
-        e.setTitle(post.getTitle());
-        e.setBody(post.getBody());
+        Post editedPost = postDao.findById(post.getId());
+        editedPost.setTitle(post.getTitle());
+        editedPost.setBody(post.getBody());
+        postDao.save(post);
+        return "redirect:/posts";
+    }
+
+    @PostMapping(path = "/posts/{id}/delete")
+    public String deletePost(@PathVariable long id){
+        postDao.delete(id);
         return "redirect:/posts";
     }
 

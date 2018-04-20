@@ -21,8 +21,7 @@ public class Post {
     private String body;
 
 
-    public Post() {
-    }
+    public Post() { }
 
     public Post(String title) {
         this.title = title;

@@ -4,9 +4,21 @@
 </head>
 <body>
 <div th:replace="partials/navbar :: navbar"></div>
-    <div class="post">
-        <h2 th:text="${post.title}"></h2>
-        <p th:text="${post.body}"></p>
+    <div class="container">
+        <div class="row">
+            <h2 class="text-center ind-post-header" th:text="${post.title}"></h2>
+        </div>
+        <div class="row ind-post-body">
+            <p class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 text-center" th:text="${post.body}"></p>
+        </div>
+        <div class="row" style="margin-top: 25px;">
+            <a class="col-xs-offset-4 col-xs-2" th:href="@{/posts}">
+                <Button class="col-xs-12 btn btn-primary">Back</Button>
+            </a>
+            <a class="col-xs-2" th:href="@{/posts/{id}/edit(id=${post.id})}">
+                <Button class="col-xs-12 btn btn-warning">Edit</Button>
+            </a>
+        </div>
     </div>
 
 <div th:replace="partials/footer :: footer"></div>

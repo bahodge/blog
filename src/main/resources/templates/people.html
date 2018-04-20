@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/header :: header('People')">
+</head>
+<body>
+<h1>These are all the people</h1>
+<div th:each="person : ${people}">
+    <h3 th:text="${person.name}"></h3>
+    <p th:text="${person.age}"></p>
+    <p th:text="${person.state_residing}"></p>
+</div>
+
+<footer th:replace="partials/footer :: footer"></footer>
+</body>
+</html>
