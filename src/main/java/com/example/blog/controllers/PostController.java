@@ -2,6 +2,7 @@ package com.example.blog.controllers;
 
 import com.example.blog.models.Post;
 import com.example.blog.repositories.PostRepository;
+import com.example.blog.repositories.UserRepository;
 import com.example.blog.services.PostService;
 import javafx.geometry.Pos;
 import org.springframework.stereotype.Controller;
@@ -12,12 +13,14 @@ import org.springframework.web.bind.annotation.*;
 public class PostController {
     private final PostService postSvc;
     private final PostRepository postDao;
+    private final UserRepository userDao;
 
-    public PostController(PostService postSvc, PostRepository postDao) {
+    public PostController(PostService postSvc, PostRepository postDao, UserRepository userDao) {
         /*
         In this particular situation. having a Post service does not make sense.
         If the service was calling multiple repositories, it would make more sense.
          */
+        this.userDao = userDao;
         this.postSvc = postSvc;
         this.postDao = postDao;
     }
@@ -49,6 +52,8 @@ public class PostController {
 
     @PostMapping(path = "/posts/create")
     public String createPost(@ModelAttribute Post post){
+//        Eventually pulled from session??
+        post.setUser(userDao.findById(1));
         postDao.save(post);
         return "redirect:/posts";
     }
@@ -65,7 +70,8 @@ public class PostController {
         Post editedPost = postDao.findById(post.getId());
         editedPost.setTitle(post.getTitle());
         editedPost.setBody(post.getBody());
-        postDao.save(post);
+        editedPost.setUser(userDao.findById(1));
+        postDao.save(editedPost);
         return "redirect:/posts";
     }
 

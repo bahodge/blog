@@ -10,21 +10,42 @@ body {
 textarea,
 input,
 .btn {
-    box-shadow: 5px 4px 5px #646464;
     font-size: 1.5em;
     margin-bottom: 10px;
     border-radius: 5px;
     border-color: transparent;
 }
 
+.btn {
+    box-shadow: 5px 4px 5px #646464;
+}
+
+.btn:active, .btn:hover {
+    box-shadow: 2px 2px 2px #363636;
+}
+
 /*Edit form*/
 textarea {
+    background-color: #e8e8e8;
     font-size: 2em;
     resize: none;
+    transition: box-shadow .5s;
 }
 
 input {
+    background-color: #e8e8e8;
     font-size: 2.5em;
+    box-shadow: none;
+    transition: box-shadow .5s;
+
+}
+
+input:focus, textarea:focus {
+
+    background-color: #FFF;
+    outline: none;
+    box-shadow: 5px 4px 5px #646464;
+    transition: box-shadow .5s, background-color .3s;
 }
 
 /*Posts home*/
@@ -41,7 +62,8 @@ input {
     border-radius: 10px;
     padding: 25px;
     box-shadow: none;
-    transition: background-color .5s, box-shadow .5s;
+    border: 1px solid transparent;
+    transition: background-color .5s, box-shadow .5s, border .5s;
 }
 
 .post-card:hover {
@@ -61,6 +83,11 @@ input {
 
 .post-body {
     color: #344738;
+    font-size: 1.5em;
+}
+
+.post-user {
+    color: #78a88c;
     font-size: 1.5em;
 }
 

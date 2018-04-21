@@ -14,6 +14,7 @@
                     <div class="post-card">
                         <h1 class="post-header" th:text="${post.title}"></h1>
                         <p class="post-body" th:text="${post.body}"></p>
+                        <p class="post-user" style="font-size: 1.5em;">By: <span th:text="${post.user.username}"></span></p>
                     </div>
                 </a>
             </div>

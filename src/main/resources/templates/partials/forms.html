@@ -9,18 +9,19 @@
 <div th:fragment="createform">
     <form th:action="@{/posts/create}" th:method="post" th:object="${post}">
         <div class="row">
-            <input class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3" type="text" th:field="*{title}" placeholder="Post title...." />
+            <input class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3" type="text" th:field="*{title}" placeholder="Post title...." required="true"/>
         </div>
         <div class="row">
             <textarea class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3" th:field="*{body}"  cols="50" rows="10" placeholder="Body"></textarea>
         </div>
 
-        <div class="row">
-            <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3">
-                <a th:href="@{/posts}"><button class="col-xs-6 col-sm-6 btn btn-primary">&lang;-Back to Posts</button></a>
-                <button class="col-xs-6 col-sm-6 btn btn-success">Submit</button>
+        <div class="row" style="margin-top: 25px;">
+            <a class="col-xs-offset-4 col-xs-2" th:href="@{/posts}">
+                <Button class="col-xs-12 btn btn-primary">Back to Posts</Button>
+            </a>
+            <div class="col-xs-2">
+                <Button id="submit-btn" class="col-xs-12 btn btn-success">Create</Button>
             </div>
-
         </div>
     </form>
 </div>
@@ -38,8 +39,7 @@
             <textarea class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3" th:field="*{body}" th:value="${body}" cols="50" rows="10" placeholder="Body"></textarea>
         </div>
         <div class="row">
-            <button class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 btn btn-success">Submit</button>
-
+            <button id="submit-btn" class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 btn btn-success">Submit</button>
         </div>
         </div>
     </form>
