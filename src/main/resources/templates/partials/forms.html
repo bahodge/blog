@@ -8,44 +8,42 @@
 
 <div th:fragment="createform">
     <form th:action="@{/posts/create}" th:method="post" th:object="${post}">
-        <div class="row">
-            <input class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3" type="text" th:field="*{title}" placeholder="Post title...." required="true"/>
-        </div>
-        <div class="row">
-            <textarea class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3" th:field="*{body}"  cols="50" rows="10" placeholder="Body"></textarea>
+        <div class="row ">
+            <Button id="submit-btn" class="col-xs-3 col-xs-offset-1 col-sm-1 col-sm-offset-2 btn btn-success">Create</Button>
         </div>
 
-        <div class="row" style="margin-top: 25px;">
-            <a class="col-xs-offset-4 col-xs-2" th:href="@{/posts}">
-                <Button class="col-xs-12 btn btn-primary">Back to Posts</Button>
-            </a>
-            <div class="col-xs-2">
-                <Button id="submit-btn" class="col-xs-12 btn btn-success">Create</Button>
-            </div>
+        <div class="row">
+            <input class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2" type="text" th:field="*{title}" placeholder="Post title...." />
         </div>
+        <div class="row">
+            <textarea class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2" th:field="*{body}"  cols="50" rows="10" placeholder="Body"></textarea>
+        </div>
+
+
     </form>
 </div>
 
 <div th:fragment="editform">
     <form th:action="@{/posts/edit}" th:method="post" th:object="${post}">
+        <div class="row">
+            <button id="submit-btn" class="col-xs-3 col-xs-offset-1 col-sm-2 col-sm-offset-2 btn btn-success">Submit</button>
+        </div>
         <div class="form-group">
             <input type="hidden" th:field="*{id}" th:value="${id}"/>
             <div class="row">
-                <input class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3" type="text" th:field="*{title}" th:value="${title}" placeholder="Post title...." />
+                <input class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2" type="text" th:field="*{title}" th:value="${title}" placeholder="Post title...." />
             </div>
 
 
         <div class="row">
-            <textarea class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3" th:field="*{body}" th:value="${body}" cols="50" rows="10" placeholder="Body"></textarea>
+            <textarea class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2" th:field="*{body}" th:value="${body}" cols="50" rows="8" placeholder="Body"></textarea>
         </div>
-        <div class="row">
-            <button id="submit-btn" class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 btn btn-success">Submit</button>
-        </div>
+
         </div>
     </form>
     <form th:action="@{/posts/{id}/delete(id = ${post.id})}" th:method="post" th:object="${post}">
         <div class="row">
-            <button class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 btn btn-danger">Delete</button>
+            <button class="col-xs-3 col-xs-offset-1 col-sm-2 col-sm-offset-2 btn btn-danger">Delete</button>
         </div>
     </form>
 </div>

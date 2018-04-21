@@ -26,13 +26,13 @@
     };
 
     //Check the initial value of title and body
-    if (title.value.length > 5){
+    if (title.value.length >= 5){
         validTitle = true;
         title.style.backgroundColor = "#76cc7d";
     } else {
         title.style.backgroundColor = "#ff9c97";
     }
-    if (body.value.length > 50){
+    if (body.value.length >= 50){
         validBody = true;
         body.style.backgroundColor = "#76cc7d";
     } else {
@@ -63,8 +63,8 @@
             body.style.backgroundColor = "#ff9c97";
             validBtn();
         } else {
-            validBtn();
             validBody = true;
+            validBtn();
             body.style.backgroundColor = "#76cc7d";
         }
     });
