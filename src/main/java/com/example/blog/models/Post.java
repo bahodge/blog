@@ -1,10 +1,4 @@
 package com.example.blog.models;
-
-import com.sun.javafx.beans.IDProperty;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
 
 @Entity

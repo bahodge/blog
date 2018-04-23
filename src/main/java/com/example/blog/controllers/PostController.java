@@ -4,7 +4,6 @@ import com.example.blog.models.Post;
 import com.example.blog.repositories.PostRepository;
 import com.example.blog.repositories.UserRepository;
 import com.example.blog.services.PostService;
-import javafx.geometry.Pos;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
