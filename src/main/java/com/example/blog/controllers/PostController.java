@@ -1,10 +1,12 @@
 package com.example.blog.controllers;
 
 import com.example.blog.models.Post;
+import com.example.blog.models.User;
 import com.example.blog.repositories.PostRepository;
 import com.example.blog.repositories.UserRepository;
 import com.example.blog.services.PostService;
 import javafx.geometry.Pos;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -53,7 +55,8 @@ public class PostController {
     @PostMapping(path = "/posts/create")
     public String createPost(@ModelAttribute Post post){
 //        Eventually pulled from session??
-        post.setUser(userDao.findById(1));
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        post.setUser(userDao.findByUsername(user.getUsername()));
         postDao.save(post);
         return "redirect:/posts";
     }
@@ -67,12 +70,18 @@ public class PostController {
 
     @PostMapping(path = "/posts/edit")
     public String handleEdit(@ModelAttribute Post post){
-        Post editedPost = postDao.findById(post.getId());
-        editedPost.setTitle(post.getTitle());
-        editedPost.setBody(post.getBody());
-        editedPost.setUser(userDao.findById(1));
-        postDao.save(editedPost);
-        return "redirect:/posts";
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (user != null){
+            System.out.println(user.getUsername());
+            Post editedPost = postDao.findById(post.getId());
+            editedPost.setTitle(post.getTitle());
+            editedPost.setBody(post.getBody());
+            editedPost.setUser(userDao.findByUsername(user.getUsername()));
+            postDao.save(editedPost);
+            return "redirect:/posts";
+        } else {
+            return "/posts";
+        }
     }
 
     @PostMapping(path = "/posts/{id}/delete")

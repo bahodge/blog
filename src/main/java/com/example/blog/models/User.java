@@ -10,14 +10,23 @@ public class User {
     @GeneratedValue
     private long id;
 
-    @Column(nullable = false)
+//    Each user must have a unique username + email
+    @Column(nullable = false, columnDefinition = "UNIQUE")
     private String username;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "UNIQUE")
     private String email;
 
     @Column(nullable = false)
     private String password;
+
+//    Copy constructor
+    public User(User copy){
+        this.id = copy.id;
+        this.email = copy.email;
+        this.username = copy.username;
+        this.password = copy.password;
+    }
 
     public User() {
     }
