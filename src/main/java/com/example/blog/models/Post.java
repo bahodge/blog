@@ -2,6 +2,8 @@ package com.example.blog.models;
 
 import com.sun.javafx.beans.IDProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 
@@ -30,9 +32,9 @@ public class Post {
     }
 
     public Post(String title, String body, User user) {
-        this.user = user;
         this.title = title;
         this.body = body;
+        this.user = user;
     }
 
     public Post(long id, String title, String body, User user) {
