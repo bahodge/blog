@@ -7,19 +7,27 @@
 <body>
 <nav th:replace="partials/navbar :: navbar"></nav>
 
-<h1>Create an account</h1>
+<div class="container">
+
+
+<h1 class="text-center">&lang; Sign Up &rang;</h1>
 <form th:action="@{/sign-up}" method="POST" th:object="${user}">
-    <label for="username">Username</label>
-    <input id="username" th:field="*{username}" />
-
-    <label for="email">Email</label>
-    <input id="email" th:field="*{email}" />
-
-    <label for="password">Password</label>
-    <input id="password" type="password" th:field="*{password}" />
-
-    <input value="Sign me up!" type="submit" />
+    <div class="row">
+        <!--<p th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>-->
+        <input class="col-xs-6 col-xs-offset-3" id="username" th:field="*{username}" placeholder="Username..."/>
+    </div>
+    <div class="row">
+        <!--<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" ></p>-->
+        <input class="col-xs-6 col-xs-offset-3" id="email" th:field="*{email}" placeholder="email@email.com"/>
+    </div>
+    <div class="row">
+        <input class="col-xs-6 col-xs-offset-3" id="password" type="password" th:field="*{password}" placeholder="Password..." />
+    </div>
+    <div class="row">
+        <input class="btn btn-success col-xs-2 col-xs-offset-5" value="Sign me up!" type="submit" />
+    </div>
 </form>
+</div>
 
 <footer th:replace="partials/footer :: footer"></footer>
 </body>

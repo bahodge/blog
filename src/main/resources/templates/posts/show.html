@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:replace="partials/header :: header(${post.title})">
 </head>
 <body>
@@ -19,10 +20,12 @@
                 <Button class="col-xs-12 btn btn-primary">Back</Button>
             </a>
             <!--Check to see if the user is the user who created the post-->
-            <div th:if="${#authentication.principal.id == post.user.id}">
-                <a class="col-xs-2" th:href="@{/posts/{id}/edit(id=${post.id})}">
-                    <Button class="col-xs-12 btn btn-warning">Edit</Button>
-                </a>
+            <div sec:authorize="${isAuthenticated()}">
+                <div th:if="${#authentication.principal.id == post.user.id}">
+                    <a class="col-xs-2" th:href="@{/posts/{id}/edit(id=${post.id})}">
+                        <Button class="col-xs-12 btn btn-warning">Edit</Button>
+                    </a>
+                </div>
             </div>
         </div>
     </div>

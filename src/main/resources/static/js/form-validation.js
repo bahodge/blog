@@ -3,7 +3,7 @@
     "use strict";
     const title = document.querySelector("#title");
     const body = document.querySelector("#body");
-    const form = document.querySelector('form');
+    const form = document.querySelector('.form')[0];
     const submitBtn = document.querySelector('#submit-btn');
 
     let validTitle = false;

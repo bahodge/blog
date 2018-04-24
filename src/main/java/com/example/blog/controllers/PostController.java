@@ -5,11 +5,13 @@ import com.example.blog.models.User;
 import com.example.blog.repositories.PostRepository;
 import com.example.blog.repositories.UserRepository;
 import com.example.blog.services.PostService;
-import javafx.geometry.Pos;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 public class PostController {
@@ -26,10 +28,6 @@ public class PostController {
         this.postSvc = postSvc;
         this.postDao = postDao;
     }
-
-//    public PostController(PostService postSvc) {
-//        this.postSvc = postSvc;
-//    }
 
 //    All Posts
     @GetMapping (path = "/posts")
@@ -59,8 +57,12 @@ public class PostController {
     }
 
     @PostMapping(path = "/posts/create")
-    public String createPost(@ModelAttribute Post post){
-//        Eventually pulled from session??
+    public String createPost(@Valid Post post, Errors errors, Model model){
+        if(errors.hasErrors()){
+            model.addAttribute("errors", errors);
+            model.addAttribute("post", post);
+            return "/posts/create";
+        }
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         post.setUser(loggedInUser);
         postDao.save(post);
@@ -75,7 +77,12 @@ public class PostController {
     }
 
     @PostMapping(path = "/posts/edit")
-    public String handleEdit(@ModelAttribute Post post){
+    public String handleEdit(@Valid Post post, Errors errors, Model model){
+        if (errors.hasErrors()){
+            model.addAttribute("errors", errors);
+            model.addAttribute("post", post);
+            return "/posts/edit";
+        }
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (user != null){
             System.out.println(user.getUsername());
@@ -84,10 +91,8 @@ public class PostController {
             editedPost.setBody(post.getBody());
             editedPost.setUser(userDao.findByUsername(user.getUsername()));
             postDao.save(editedPost);
-            return "redirect:/posts";
-        } else {
-            return "/posts";
         }
+        return "redirect:/posts";
     }
 
     @PostMapping(path = "/posts/{id}/delete")

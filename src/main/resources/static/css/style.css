@@ -27,6 +27,11 @@ body {
     font-size: 2em;
 }
 
+.validation-error {
+    color: #ff9c97;
+    font-size: 1.5em;
+    font-weight: bold;
+}
 
 textarea,
 input,
@@ -122,3 +127,16 @@ input:focus, textarea:focus {
  .ind-post-body {
      font-size: 2em;
  }
+
+ /*Profile posts*/
+
+.profile-post {
+    color: #344738;
+
+}
+
+.profile-post:hover {
+    color: #4e6955;
+    font-weight: bold;
+    text-decoration: none;
+}

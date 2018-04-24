@@ -2,13 +2,15 @@ package com.example.blog.controllers;
 
 import com.example.blog.models.User;
 import com.example.blog.repositories.UserRepository;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import javax.validation.Valid;
 
 @Controller
 public class UserController {
@@ -25,6 +27,23 @@ public class UserController {
         model.addAttribute("user", new User());
         return "users/sign-up";
     }
+
+//    @PostMapping(path = "/sign-up")
+//    public String saveUser(@Valid User user, Errors errors, Model model){
+//        if (errors.hasErrors()){
+//            model.addAttribute("errors", errors);
+//            return "/sign-up";
+//        }
+////        If user doesn't exist, create a new one.
+//        if (userDao.findByUsername(user.getUsername()) == null){
+//            String hash = passwordEncoder.encode(user.getPassword());
+//            user.setPassword(hash);
+//            userDao.save(user);
+//            return "redirect:/login";
+//        } else {
+//            return "redirect:/sign-up";
+//        }
+//    }
 
     @PostMapping("/sign-up")
     public String saveUser(@ModelAttribute User user){

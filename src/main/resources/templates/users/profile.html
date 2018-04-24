@@ -7,12 +7,21 @@
 <body>
 <nav th:replace="partials/navbar :: navbar"></nav>
 
-<div sec:authorize="isAuthenticated()">
-    <div>
-        <h1>Welcome <span th:text="${#authentication.principal.username}"></span></h1>
+<div sec:authorize="isAuthenticated()" class="container">
+    <div class="row">
+        <h1 class="text-center">Welcome <span th:text="${#authentication.principal.username}"></span></h1>
     </div>
-</div>
 
+
+<!--Display all posts by user-->
+<div class="row">
+<div class="text-center" th:each="post : ${posts}">
+    <a class="profile-post-link col-sm-4 " th:href="@{/posts/{id}(id=${post.id})}">
+        <h3 class="profile-post" th:text="${post.title}"></h3>
+    </a>
+</div>
+</div>
+</div>
 <footer th:replace="partials/footer :: footer"></footer>
 </body>
 </html>

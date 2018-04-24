@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/header :: header(${error})">
+    <meta charset="UTF-8"/>
+    <title th:text="'Ooops, ' + ${error}"></title>
+</head>
+<body>
+<nav th:replace="partials/navbar :: navbar"></nav>
+
+<div class="container">
+    <div class="row">
+        <h1 class="text-center">Internal Error</h1>
+
+    </div>
+    <div class="row">
+        <div class="col-xs-10 col-xs-offset-1">
+            <p class="text-center">Watch a video instead</p>
+            <iframe class="center-block"
+                    width="420"
+                    height="315"
+                    src="https://www.youtube.com/embed/NN75im_us4k?autoplay=1"
+                    frameborder="0"
+                    allowfullscreen="allowfullscreen"
+            >
+            </iframe>
+        </div>
+    </div>
+</div>

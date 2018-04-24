@@ -1,6 +1,9 @@
 package com.example.blog.models;
 
+import org.hibernate.validator.constraints.Email;
+
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "users")
@@ -12,12 +15,15 @@ public class User {
 
 //    Each user must have a unique username + email
     @Column(nullable = false, columnDefinition = "UNIQUE")
+//    @Size(min = 3, max = 20, message = "Username must be 3 - 20 characters long")
     private String username;
 
     @Column(nullable = false, columnDefinition = "UNIQUE")
+//    @Email(message = "Email must be valid")
     private String email;
 
     @Column(nullable = false)
+//    @Size(min = 3, max = 20, message = "Password must be 3 - 20 characters long")
     private String password;
 
 //    Copy constructor

@@ -6,6 +6,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "posts")
@@ -17,9 +18,11 @@ public class Post {
     private long id;
 
     @Column(nullable = false)
+    @Size(min = 5, message = "Title length must be at least 5 characters.")
     private String title;
 
     @Column(columnDefinition = "TEXT", nullable = false)
+    @Size(min = 50, message = "Body of post must be at least 50 characters.")
     private String body;
 
     @OneToOne
