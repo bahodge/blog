@@ -4,8 +4,29 @@
 
 body {
     background-color: #f9f9f9;
+    color: #6d6d6d;
     font-family: 'PT Sans Narrow', sans-serif;
 }
+
+.logout-btn {
+    margin: 15px 25px 0 15px;
+    background:none!important;
+    color:inherit;
+    border:none;
+    padding:0!important;
+    font: inherit;
+    cursor: pointer;
+}
+
+.logout-btn:hover {
+    margin-top: 5px;
+}
+
+.logout-btn:hover, #navbar-collapse-1 > ul > li a:hover {
+    color: #5c9098;
+    font-size: 2em;
+}
+
 
 textarea,
 input,
