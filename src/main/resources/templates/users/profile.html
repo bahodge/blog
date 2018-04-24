@@ -8,12 +8,8 @@
 <nav th:replace="partials/navbar :: navbar"></nav>
 
 <div sec:authorize="isAuthenticated()">
-    This content is only shown to authenticated users.
     <div>
         <h1>Welcome <span th:text="${#authentication.principal.username}"></span></h1>
-        <!--User ID: <span th:text="${#authentication.principal.id}"></span>-->
-        <!--Username: <span th:text="${#authentication.principal.username}"></span>-->
-        <!--Email: <span th:text="${#authentication.principal.email}"></span>-->
     </div>
 </div>
 

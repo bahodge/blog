@@ -38,6 +38,12 @@ public class PostController {
         return "posts/index";
     }
 
+    @GetMapping(path = "/")
+    public String redirectPosts(Model model){
+        model.addAttribute("posts", postDao.findAll());
+        return "/posts/index";
+    }
+
 //  Individual Post
     @GetMapping (path = "/posts/{id}")
     public String show(Model model, @PathVariable long id){
@@ -55,8 +61,8 @@ public class PostController {
     @PostMapping(path = "/posts/create")
     public String createPost(@ModelAttribute Post post){
 //        Eventually pulled from session??
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        post.setUser(userDao.findByUsername(user.getUsername()));
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        post.setUser(loggedInUser);
         postDao.save(post);
         return "redirect:/posts";
     }
