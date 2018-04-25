@@ -11,7 +11,7 @@
 
 
 <h1 class="text-center">&lang; Sign Up &rang;</h1>
-<form th:action="@{/sign-up}" method="POST" th:object="${user}">
+<form class="sign-up-form" th:action="@{/sign-up}" method="POST" th:object="${user}">
     <div class="row">
         <!--<p th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>-->
         <input class="col-xs-6 col-xs-offset-3" id="username" th:field="*{username}" placeholder="Username..."/>
@@ -24,11 +24,15 @@
         <input class="col-xs-6 col-xs-offset-3" id="password" type="password" th:field="*{password}" placeholder="Password..." />
     </div>
     <div class="row">
-        <input class="btn btn-success col-xs-2 col-xs-offset-5" value="Sign me up!" type="submit" />
+        <p id="password-feedback" class="col-xs-6 col-xs-offset-3"></p>
+    </div>
+    <div class="row">
+        <input id="submit-btn" class="btn btn-success col-xs-2 col-xs-offset-5" value="Sign me up!" type="submit" />
     </div>
 </form>
 </div>
 
 <footer th:replace="partials/footer :: footer"></footer>
+<script src="/js/registration-validation.js"></script>
 </body>
 </html>
