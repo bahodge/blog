@@ -1,4 +1,3 @@
-
 (function(){
     "use strict";
     const title = document.querySelector("#title");
@@ -20,7 +19,7 @@
             submitBtn.style.backgroundColor = "#76cc7d";
             submitBtn.removeAttribute("disabled");
         } else {
-            submitBtn.style.backgroundColor = "#ff9c97";
+            submitBtn.style.backgroundColor = "#ffbfb0";
             submitBtn.setAttribute("disabled","");
         }
     };
@@ -30,13 +29,13 @@
         validTitle = true;
         title.style.backgroundColor = "#76cc7d";
     } else {
-        title.style.backgroundColor = "#ff9c97";
+        title.style.backgroundColor = "#ffbfb0";
     }
     if (body.value.length >= 50){
         validBody = true;
         body.style.backgroundColor = "#76cc7d";
     } else {
-        body.style.backgroundColor = "#ff9c97";
+        body.style.backgroundColor = "#ffbfb0";
     }
 
     //Check initial state and set button color
@@ -48,7 +47,7 @@
     title.addEventListener('keyup', () => {
         if (title.value.length < 5){
             validTitle = false;
-            title.style.backgroundColor = "#ff9c97";
+            title.style.backgroundColor = "#ffbfb0";
             validBtn();
         } else {
             validTitle = true;
@@ -60,7 +59,7 @@
     body.addEventListener("keyup", () => {
         if (body.value.length < 50){
             validBody = false;
-            body.style.backgroundColor = "#ff9c97";
+            body.style.backgroundColor = "#ffbfb0";
             validBtn();
         } else {
             validBody = true;
