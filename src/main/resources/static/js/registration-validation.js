@@ -5,7 +5,7 @@
     const username = document.querySelector("#username");
     const email = document.querySelector("#email");
     const password = document.querySelector("#password");
-    const passFeedback = document.querySelector("#password-feedback");
+    const passwordFeedback = document.querySelectorAll(".password-feedback");
     const submitBtn = document.querySelector("#submit-btn");
     const specialChar = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "_", "+", "=", "/", ".", ",", "'", '"', ";", ":", "[", "]", "{", "}", "\\", "|"];
 
@@ -27,12 +27,47 @@
         let uppers  = pass.match(/[A-Z]/);
         let lowers  = pass.match(/[a-z]/);
         let special = pass.match(/[!@#$%\^&*\+]/);
+        // let len = pass.length();
+
+        if (numbers !== null){
+            passwordFeedback[0].style.color = 'green';
+            passwordFeedback[0].style.fontSize = '1em';
+        } else {
+            passwordFeedback[0].style.color = 'red';
+            passwordFeedback[0].style.fontSize = '1.5em';
+        }
+
+        if (uppers !== null){
+            passwordFeedback[1].style.color = 'green';
+            passwordFeedback[1].style.fontSize = '1em';
+        } else {
+            passwordFeedback[1].style.color = 'red';
+            passwordFeedback[1].style.fontSize = '1.5em';
+        }
+
+        if (lowers !== null){
+            passwordFeedback[2].style.color = 'green';
+            passwordFeedback[2].style.fontSize = '1em';
+        } else {
+            passwordFeedback[2].style.color = 'red';
+            passwordFeedback[2].style.fontSize = '1.5em';
+        }
+
+        if (special !== null){
+            passwordFeedback[3].style.color = 'green';
+            passwordFeedback[3].style.fontSize = '1em';
+        } else {
+            passwordFeedback[3].style.color = 'red';
+            passwordFeedback[3].style.fontSize = '1.5em';
+        }
 
         if (numbers === null || uppers === null || lowers === null || special === null)
             valid = false;
 
         if (numbers !== null && uppers !== null && lowers !== null && special !== null)
             valid = true;
+
+
 
         console.log(valid);
         return valid;
@@ -97,11 +132,7 @@
 
 
     password.addEventListener('keyup', () => {
-        if (checkPassword(password.value)){
-            passFeedback.innerHTML = "Valid Password";
-        } else {
-            passFeedback.innerHTML = "Password must have '1-9', 'a-z', 'A-Z' and special char";
-        }
+        checkPassword(password.value);
     });
 
     submitBtn.addEventListener('click', validateForm());

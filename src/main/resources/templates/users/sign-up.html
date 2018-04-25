@@ -24,7 +24,12 @@
         <input class="col-xs-6 col-xs-offset-3" id="password" type="password" th:field="*{password}" placeholder="Password..." />
     </div>
     <div class="row">
-        <p id="password-feedback" class="col-xs-6 col-xs-offset-3"></p>
+        <ul class="list-inline col-xs-6 col-xs-offset-4">
+            <li class="password-feedback">Numbers: 0-9</li>
+            <li class="password-feedback">Uppers: A-Z</li>
+            <li class="password-feedback">Lowers: a-z</li>
+            <li class="password-feedback">Special: @, $, !, ^, etc.</li>
+        </ul>
     </div>
     <div class="row">
         <input id="submit-btn" class="btn btn-success col-xs-2 col-xs-offset-5" value="Sign me up!" type="submit" />
