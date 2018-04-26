@@ -21,10 +21,13 @@
         <input class="col-xs-6 col-xs-offset-3" id="email" th:field="*{email}" placeholder="email@email.com"/>
     </div>
     <div class="row">
+        <p id="email-feedback" class="col-xs-6 col-xs-offset-3"></p>
+    </div>
+    <div class="row">
         <input class="col-xs-6 col-xs-offset-3" id="password" type="password" th:field="*{password}" placeholder="Password..." />
     </div>
     <div class="row">
-        <ul class="list-inline col-xs-6 col-xs-offset-4">
+        <ul class="list-inline col-xs-6 col-xs-offset-3">
             <li class="password-feedback">Numbers: 0-9</li>
             <li class="password-feedback">Uppers: A-Z</li>
             <li class="password-feedback">Lowers: a-z</li>

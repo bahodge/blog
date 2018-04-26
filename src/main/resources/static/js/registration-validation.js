@@ -4,10 +4,10 @@
     const form = document.querySelectorAll(".sign-up-form")[0];
     const username = document.querySelector("#username");
     const email = document.querySelector("#email");
+    const emailFeedback = document.querySelector('#email-feedback');
     const password = document.querySelector("#password");
     const passwordFeedback = document.querySelectorAll(".password-feedback");
     const submitBtn = document.querySelector("#submit-btn");
-    const specialChar = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "_", "+", "=", "/", ".", ",", "'", '"', ";", ":", "[", "]", "{", "}", "\\", "|"];
 
     let validUsername = false;
     let validEmail = false;
@@ -19,123 +19,135 @@
         }
     };
 
-    form.addEventListener("submit", (e) => e.preventDefault());
-    let valid;
-    function checkPassword(pass) {
+    const validBtn = e => {
+        if (validUsername && validEmail && validPassword){
+            submitBtn.style.backgroundColor = "#76cc7d";
+            submitBtn.removeAttribute("disabled");
+        } else {
+            submitBtn.style.backgroundColor = "#dd9888";
+            submitBtn.setAttribute("disabled","");
+        }
+    };
+
+    const checkUsername = (name) => {
+        if(name.length >= 5) {
+            validUsername = true;
+            username.style.backgroundColor = '#76cc7d';
+            username.style.color = '#6d6d6d';
+        } else {
+            validUsername = false;
+            username.style.backgroundColor = '#dd9888';
+            username.style.color = '#fff';
+        }
+        validBtn();
+        return validUsername;
+    };
+
+    const checkEmail = (mail) => {
+        let atSymbol = mail.match(/[@]/);
+        let dot = mail.match(/[.]/);
+        if(atSymbol != null && dot != null ) {
+            validEmail = true;
+            emailFeedback.innerHTML = "Valid Email";
+            emailFeedback.style.color = '#76cc7d';
+            emailFeedback.style.fontSize = '1em';
+            email.style.backgroundColor = '#76cc7d';
+            email.style.color = '#6d6d6d';
+        } else {
+            validEmail = false;
+            emailFeedback.innerHTML = "Invalid Email";
+            emailFeedback.style.color = '#d07363';
+            emailFeedback.style.fontSize = '1.5em';
+            email.style.backgroundColor = '#dd9888';
+            email.style.color = '#fff';
+        }
+
+        validBtn();
+        return validEmail;
+    };
+
+
+
+    const checkPassword = (pass) => {
 
         let numbers = pass.match(/\d+/g);
         let uppers  = pass.match(/[A-Z]/);
         let lowers  = pass.match(/[a-z]/);
         let special = pass.match(/[!@#$%\^&*\+]/);
-        // let len = pass.length();
+
 
         if (numbers !== null){
-            passwordFeedback[0].style.color = 'green';
+            passwordFeedback[0].style.color = '#76cc7d';
             passwordFeedback[0].style.fontSize = '1em';
         } else {
-            passwordFeedback[0].style.color = 'red';
+            passwordFeedback[0].style.color = '#d07363';
             passwordFeedback[0].style.fontSize = '1.5em';
         }
 
         if (uppers !== null){
-            passwordFeedback[1].style.color = 'green';
+            passwordFeedback[1].style.color = '#76cc7d';
             passwordFeedback[1].style.fontSize = '1em';
         } else {
-            passwordFeedback[1].style.color = 'red';
+            passwordFeedback[1].style.color = '#d07363';
             passwordFeedback[1].style.fontSize = '1.5em';
         }
 
         if (lowers !== null){
-            passwordFeedback[2].style.color = 'green';
+            passwordFeedback[2].style.color = '#76cc7d';
             passwordFeedback[2].style.fontSize = '1em';
         } else {
-            passwordFeedback[2].style.color = 'red';
+            passwordFeedback[2].style.color = '#d07363';
             passwordFeedback[2].style.fontSize = '1.5em';
         }
 
         if (special !== null){
-            passwordFeedback[3].style.color = 'green';
+            passwordFeedback[3].style.color = '#76cc7d';
             passwordFeedback[3].style.fontSize = '1em';
         } else {
-            passwordFeedback[3].style.color = 'red';
+            passwordFeedback[3].style.color = '#d07363';
             passwordFeedback[3].style.fontSize = '1.5em';
         }
 
-        if (numbers === null || uppers === null || lowers === null || special === null)
-            valid = false;
+        if (numbers === null || uppers === null || lowers === null || special === null) {
+            validPassword = false;
+            password.style.backgroundColor = '#dd9888';
+            password.style.color = '#fff';
 
-        if (numbers !== null && uppers !== null && lowers !== null && special !== null)
-            valid = true;
-
-
-
-        console.log(valid);
-        return valid;
-
-    }
-
-    function scorePassword(pass) {
-        let score = 0;
-        if (!pass)
-            return score;
-
-        // award every unique letter until 5 repetitions
-//  var letters = new Object();
-        let letters = {};
-        for (let i=0; i<pass.length; i++) {
-            letters[pass[i]] = (letters[pass[i]] || 0) + 1;
-            score += 5.0 / letters[pass[i]];
         }
 
-        // bonus points for mixing it up
-        let variations = {
-            digits: /\d/.test(pass),
-            lower: /[a-z]/.test(pass),
-            upper: /[A-Z]/.test(pass),
-            nonWords: /\W/.test(pass)
-        };
-
-        let variationCount = 0;
-        for (let check in variations) {
-            variationCount += (variations[check] === true) ? 1 : 0;
+        if (numbers !== null && uppers !== null && lowers !== null && special !== null){
+            validPassword = true;
+            password.style.backgroundColor = '#76cc7d';
+            password.style.color = '#6d6d6d';
         }
-        score += (variationCount - 1) * 10;
 
-//    return parseInt(score);
-        return parseInt(score, 10);
-    }
+        validBtn();
+        return validPassword;
+
+    };
 
 //********************************************************
 // run scoring and apply a value to it
 //********************************************************
-    const between = (score, low, high) => (score >= low && score <= high);
 
-    function checkPassStrength(pass) {
-        let score = scorePassword(pass);
-        if (score > 79)
-            return 'excellent';
+    form.addEventListener("submit", (e) => e.preventDefault());
+    validBtn();
+    checkUsername(username.value);
+    checkEmail(email.value);
+    checkPassword(password.value);
 
-        if (between(score, 60, 79))
-            return 'strong';
+    username.addEventListener('keyup', () => {
+        checkUsername(username.value);
+    });
 
-        if (between(score, 40, 59))
-            return 'good';
-
-        if (between(score, 21, 39))
-            return 'weak';
-
-        if (score < 21)
-            return 'poor';
-
-        return '';
-    }
-
-
+    email.addEventListener('keyup', () => {
+        checkEmail(email.value);
+    });
     password.addEventListener('keyup', () => {
         checkPassword(password.value);
     });
 
-    submitBtn.addEventListener('click', validateForm());
+    submitBtn.addEventListener('click', validateForm);
 
 
 
